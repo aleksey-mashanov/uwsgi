@@ -457,11 +457,11 @@ XS(XS_coroae_int_sighandler) {
 	coroae_int();
 }
 
-static void coroae_gbcw(const char *reason) {
+static void coroae_gbcw(void) {
 	if (ucoroae.destroy) return;
 	ucoroae.destroy = 1;
 
-	uwsgi_log("...The work of process %d is done (reason: %s). Seeya!\n", getpid(), (reason != NULL ? reason : "no reason given"));
+	uwsgi_log("...The work of process %d is done. Seeya!\n", getpid());
 
 	uwsgi_time_bomb(uwsgi.worker_reload_mercy, 0);
 	
